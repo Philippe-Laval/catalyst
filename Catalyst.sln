@@ -32,6 +32,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Catalyst.Tests", "tests\Cat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D367F80C-ECEA-44F8-81CD-D08BC05B3C37}"
 	ProjectSection(SolutionItems) = preProject
+		Examples.md = Examples.md
 		README.md = README.md
 	EndProjectSection
 EndProject
