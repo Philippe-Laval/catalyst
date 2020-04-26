@@ -6,6 +6,10 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+// http://www.nltk.org/nltk_data/
+// https://github.com/nltk/nltk_data
+
 namespace Catalyst
 {
     public static partial class Corpus

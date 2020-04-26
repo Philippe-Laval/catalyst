@@ -36,3 +36,31 @@ foreach (var kv in allPredictions.OrderByDescending(kv => kv.Value).Take(10))
     Console.WriteLine($"{kv.Key.ToString().PadRight(40)}\tScore: {kv.Value:n2}");
 }
 ```
+
+## ✨ EntityRecognition
+
+This project shows hwo to recognize some entities in a text.
+
+Catalyst currently supports 3 different types of models for Named Entity Recognition (NER):
+- Gazetteer-like(i.e. [Spotter](https://github.com/curiosity-ai/catalyst/blob/master/Catalyst/src/Models/EntityRecognition/Spotter.cs)) 
+- Regex-like(i.e. [PatternSpotter](https://github.com/curiosity-ai/catalyst/blob/master/Catalyst/src/Models/EntityRecognition/PatternSpotter.cs))
+- Perceptron (i.e. [AveragePerceptronEntityRecognizer](https://github.com/curiosity-ai/catalyst/blob/master/Catalyst/src/Models/EntityRecognition/AveragePerceptronEntityRecognizer.cs))
+
+If something is not well recognized, it is possible to help the model by hand.
+
+```csharp
+//For correcting Entity Recognition mistakes, you can use the Neuralyzer class. 
+//This class uses the Pattern Matching entity recognition class to perform "forget-entity" and "add-entity" 
+//passes on the document, after it has been processed by all other proceses in the NLP pipeline
+var neuralizer = new Neuralyzer(Language.English, 0, "WikiNER-sample-fixes");
+
+//Teach the Neuralyzer class to forget the match for a single token "Amazon" with entity type "Location"
+neuralizer.TeachForgetPattern("Location",  "Amazon", mp => mp.Add(new PatternUnit(P.Single().WithToken("Amazon").WithEntityType("Location"))));
+            
+//Teach the Neuralyzer class to add the entity type Organization for a match for the single token "Amazon"
+neuralizer.TeachAddPattern("Organization", "Amazon", mp => mp.Add(new PatternUnit(P.Single().WithToken("Amazon"))));
+
+//Add the Neuralyzer to the pipeline
+nlp.UseNeuralyzer(neuralizer);
+```
+

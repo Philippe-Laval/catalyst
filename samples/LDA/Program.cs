@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Mosaik.Core;
 
+// Latent Dirichlet Allocation (LDA) 
+
 namespace Catalyst.Samples
 {
     class Program
